@@ -1,116 +1,153 @@
 # SUFFICE
 
-A six-slot creative performance effect for Windows — VST3 and standalone —
-built with JUCE and C++. One **TRANSFORM** knob morphs a chain of up to six
-effects from untouched input to fully processed sound.
+**A creative multi-effect plugin for sound design, experimentation, and performance.**
 
-![SUFFICE main view](Documentation/reference-default.png)
+SUFFICE is a six-slot audio effect built with C++ and JUCE for Windows, available in VST3 and standalone formats.
+
+At its center is **TRANSFORM**, a single macro control that morphs an entire effect chain from its original signal to a fully transformed sound. Combine granular processing, rhythmic manipulation, distortion, modulation, and spatial effects to create evolving textures, unpredictable rhythms, and entirely new sonic possibilities.
+
+![SUFFICE Main Interface](Documentation/reference-default.png)
 
 **Version 1.9.20** · Windows x64 · VST3 + Standalone
 
-## What it's for
+---
 
-SUFFICE is built for sound design and live performance: stacking grain,
-rhythm, distortion, space and texture into a single playable gesture. Every
-slot's Amount follows TRANSFORM, so a full chain can be swept, automated or
-played by hand without balancing a dozen controls. Dice and Variation generate
-new chains or variations on the current one, and 257 built-in patches
-give starting points across many styles.
+## Overview
+
+SUFFICE explores the space between traditional audio processing and creative sound manipulation.
+
+Rather than treating effects as isolated processors, SUFFICE encourages building interconnected chains that can be manipulated as a single instrument.
+
+Its design focuses on three principles:
+
+- **Exploration:** Discover unexpected sounds through intelligent randomization and variation.
+- **Expression:** Manipulate complex effect chains through intuitive performance controls.
+- **Visual Feedback:** Understand how sound is being transformed through dynamic, responsive visualizations.
+
+From subtle movement and coloration to aggressive distortion, rhythmic fragmentation, and abstract soundscapes, SUFFICE is designed to make experimentation immediate and expressive.
 
 ## Features
 
-**Six reorderable slots, eleven engines**
+### Six Slots. Eleven Effects. Endless Possibilities.
 
-| Effect | What it does |
-| --- | --- |
-| Grain | Up to 64 windowed voices over captured audio; per-control randomness, freeze, reverse, morphable envelope |
-| Chop | Slices and rearranges audio in swung 16-step phrases; 58 authored patterns plus a generator |
-| Pulse | Gain-only rhythmic shaping: tremolo, pumps, gates and 48 morphable shapes |
-| Saturate | Soft, asymmetric and fold waveshaping with bias, pre/post filters and auto level |
-| Filter | 23 shapes, up to 48 dB/oct, single/series/parallel A/B pairs, LFO and envelope follower |
-| Chorus | 1–8 voices with feedback and loop filtering |
-| Delay | Standard and ping-pong echoes with wow, ducking and return colour |
-| Reverb | Plate and Hall networks, up to 48 s decay |
-| Compress | Single-band or three-band multiband with per-band solo/mute and meters |
-| Wear | Continuous blend of Legacy, Tape, Vinyl, Digital and Damaged ageing |
-| Texture | Procedural and original synthesized loops, or your own sample, ducked or following the input |
+Build custom effect chains using six independently configurable, reorderable slots.
 
-**Performance and workflow**
+| Effect | Description |
+|--------|-------------|
+| **Grain** | Granular processing with up to 64 voices, freeze, reverse, randomized parameters, and morphable envelopes. |
+| **Chop** | Rhythmic audio slicing and rearrangement with 58 designed patterns and procedural generation. |
+| **Pulse** | Rhythmic volume shaping, tremolo, pumping, and gating with 48 morphable shapes. |
+| **Saturate** | Analog-inspired coloration, waveshaping, distortion, folding, and dynamic tonal shaping. |
+| **Filter** | 23 filter shapes with dual-filter configurations, modulation, and envelope following. |
+| **Chorus** | Multi-voice modulation with adjustable feedback and filtering. |
+| **Delay** | Standard and ping-pong delays with modulation, ducking, and tonal coloration. |
+| **Reverb** | Plate and Hall reverberation with extensive decay and tonal controls. |
+| **Compress** | Single-band and three-band dynamics processing with independent band controls and visual metering. |
+| **Wear** | Blend vintage and degraded audio characteristics, including Tape, Vinyl, Digital, and Damaged textures. |
+| **Texture** | Layer procedural textures, synthesized audio loops, or imported samples with adaptive signal interaction. |
 
-- TRANSFORM macro with per-slot offsets, unlink/relink and global Mix and Output.
-- Host-synced timing with straight, triplet and dotted divisions, plus Free
-  timing with 1X/4X/8X range multipliers.
-- XY editing surfaces and an editable filter response graph.
-- Dice (new chain), Variation (same chain, new settings) and per-slot dice, all undoable.
-- Module lock and reset from the right-click menu; locked modules are skipped by Dice.
-- Solo and power per slot; a PANIC button clears tails without changing settings.
+### TRANSFORM
 
-**Presets**
+The central performance control of SUFFICE.
 
-- 257 factory patches: Factory (80), SKIN & CIRCUIT (90), FERAL BLOOM (55) and PRISM RIOT (32).
-- `.sufficepreset` user library with a tag-filtered browser; imported texture
-  samples are embedded in presets and projects.
+TRANSFORM simultaneously manipulates the processing intensity of every effect in the chain, allowing complex sounds to evolve through a single gesture.
 
-**Visuals**
+- Independently adjust each slot's response to TRANSFORM.
+- Link or unlink effects from the global macro.
+- Automate TRANSFORM directly from a DAW.
+- Move seamlessly between subtle processing and extreme transformations.
+- Fine-tune the resulting sound with global Mix and Output controls.
 
-- Each effect has an animated visual that responds to its parameters and the
-  processed audio. Visuals vary per instance but never affect the sound.
+### Randomization & Variation
 
-**Safety**
+SUFFICE is built around creative discovery.
 
-- A -0.1 dBFS stereo-linked peak guard, fault latching on invalid audio, and
-  optional auto makeup gain.
-- No allocation, locks or blocking I/O in the audio callback; Compress reports
-  its lookahead latency to the host.
-- 8–192 kHz, mono or stereo, variable buffer sizes.
+- **Dice:** Generate an entirely new combination of effects and parameters.
+- **Variation:** Reinterpret the current chain while preserving its effect configuration.
+- **Per-Slot Randomization:** Randomize individual effects without disturbing the rest of the chain.
+- **Module Locking:** Protect individual effects from randomization.
+- **Undo & Redo:** Experiment freely while retaining control over changes.
 
-## How it was developed
+Randomization extends beyond conventional parameter adjustments, exploring effect types, processing modes, rhythmic patterns, and texture sources.
 
-SUFFICE is written in C++17 on [JUCE](https://juce.com) (pinned as a
-submodule) with CMake and the Visual Studio toolchain. It was developed in
-short iterative releases from a 1.9.0 baseline. Every release is planned and
-recorded in the [version logbook](Documentation/Logbook.md), and design notes
-for each feature are kept in [`Documentation/`](Documentation/).
+### Interactive Visualizations
 
-AI coding agents did much of the implementation, working under the rules in
-[`AGENTS.md`](AGENTS.md). Those rules cover scope limits, a real-time
-audio-safety policy and required verification. Verification uses three tiers
-run by `scripts/check.ps1`:
+Every effect includes a custom animated visualization designed to represent its sonic behavior.
 
-1. **Quick:** focused offline checks for UI and documentation changes.
-2. **Standard:** the relevant checks plus a Release build.
-3. **Full:** the complete offline suite (80 checks), an AddressSanitizer build
-   and [pluginval](https://github.com/Tracktion/pluginval) at strictness 10.
-   Required for any change that touches the audio path.
+Visuals respond to effect parameters and processed audio, providing real-time feedback while maintaining an experimental visual identity.
 
-See [the development workflow](Documentation/Workflow.md) for details.
+Additional interfaces include interactive XY controls, editable filter response curves, and dynamic processing meters.
 
-## Building
+The visual system introduces variation between instances without altering the underlying sound.
 
-Requirements: Windows 10/11 x64, Visual Studio C++ Build Tools, the Windows SDK
-and CMake 3.24 or newer.
+### Performance & Workflow
 
-```powershell
-git clone --recurse-submodules https://github.com/jacobthomasjohnson/suffice.git
-cd suffice
-./scripts/build.ps1
-```
+- Six independently controlled, reorderable effect slots.
+- Global and per-slot performance controls.
+- Effect bypass, solo, locking, and parameter reset.
+- Host-synchronized timing with straight, dotted, and triplet divisions.
+- Free-running timing with extended modulation ranges.
+- Panic control for clearing active effect tails.
+- Preset browsing with category and tag filtering.
+- Support for importing custom audio textures.
 
-Outputs:
+### Preset Library
 
-- `build/Suffice_artefacts/Release/VST3/SUFFICE.vst3`
-- `build/Suffice_artefacts/Release/Standalone/SUFFICE.exe`
+SUFFICE includes **257 factory presets** across four collections:
 
-Nothing is installed automatically. See [INSTALL.md](INSTALL.md) for
-installation and [VALIDATION.md](VALIDATION.md) for validation.
+| Collection | Presets |
+|------------|--------:|
+| Factory | 80 |
+| SKIN & CIRCUIT | 90 |
+| FERAL BLOOM | 55 |
+| PRISM RIOT | 32 |
+| **Total** | **257** |
 
-## Documentation
+Presets range from subtle processing and rhythmic experimentation to dense textures, aggressive distortion, and evolving soundscapes.
 
-- [User guide](Documentation/User-guide.md): every control and effect in detail
-- [Preset guide](Documentation/Preset-guide.md) and [factory collections](Documentation/Factory-collection.md)
-- [Version logbook](Documentation/Logbook.md) and roadmap
+Custom presets can be saved, organized, tagged, and recalled through the integrated preset browser.
+
+Imported audio textures are embedded directly into saved presets and projects for reliable recall.
+
+---
+
+## Technical Overview
+
+SUFFICE is developed in **C++17 using the JUCE framework**, with an emphasis on real-time audio processing, responsive interaction, and low-latency performance.
+
+| Specification | Details |
+|---------------|---------|
+| Framework | JUCE |
+| Language | C++17 |
+| Formats | VST3, Standalone |
+| Platform | Windows x64 |
+| Sample Rates | 8–192 kHz |
+| Audio Channels | Mono / Stereo |
+| Processing | Real-time, variable buffer sizes |
+| Presets | 257 factory presets |
+
+The audio engine includes safeguards against invalid signal states, stereo-linked peak protection, optional automatic makeup gain, and host-reported latency compensation where required.
+
+Audio processing is designed to avoid memory allocation, blocking operations, and locks within the real-time callback.
+
+## Development
+
+SUFFICE is an independently developed audio software project, combining digital signal processing, generative sound design, and custom interface development.
+
+The project is built through iterative design and development, with particular attention to the relationship between audio behavior, parameter interaction, and visual feedback.
+
+Development has included AI-assisted programming workflows, automated validation, and extensive testing of the audio processing engine and user interface.
+
+## Project Status
+
+**SUFFICE is an actively developed, proprietary software project.**
+
+This repository serves as a showcase of the plugin, its design, and its capabilities. The source code and internal development resources are not publicly distributed.
 
 ## License
 
-JUCE is used under its own license (`vendor/JUCE/LICENSE.md`). All bundled
-texture loops are original synthesis; no third-party recordings are included.
+© 2026 Jacob Johnson. All rights reserved.
+
+SUFFICE is proprietary software. No permission is granted to copy, modify, redistribute, or commercially use the software or its associated assets without explicit authorization.
+
+JUCE and other third-party dependencies remain subject to their respective licenses.
